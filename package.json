@@ -1,0 +1,22 @@
+{
+  "name": "nodejs_report-2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/castlejinni1226/nodejs_report-2.git",
+  "author": "김성진 <jinni1226@naver.com>",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon app.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.9.0",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "prisma": "^5.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
+  }
+}
