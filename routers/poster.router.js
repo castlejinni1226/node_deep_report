@@ -43,7 +43,7 @@ router.get('/posts/:postId', async (req, res, next) => {
     return res.status(200).json({ data : post})
 })
 
-router.post('/postcreate', async (req, res, next) => {
+router.post('/POST', async (req, res, next) => {
     if (validateAccessToken(req, res)) {
         return;
     }
