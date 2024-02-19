@@ -2,7 +2,7 @@
   "name": "nodejs_report-2",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/castlejinni1226/nodejs_report-2.git",
+  "repository": "https://github.com/castlejinni1226/node_deep_report.git",
   "author": "김성진 <jinni1226@naver.com>",
   "license": "MIT",
   "type": "module",
