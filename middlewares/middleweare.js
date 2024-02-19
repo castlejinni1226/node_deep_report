@@ -14,7 +14,7 @@ function createAccessToken (res, id) {
     res.cookie('accessToken', accessToken);
 }
 
-function validateAccessToken (req,res) {
+async function validateAccessToken (req,res,next) {
 
     const accessToken = req.cookies.accessToken;
     if (!accessToken) {
@@ -26,6 +26,16 @@ function validateAccessToken (req,res) {
         return res.status(401).json({message : "Access Token이 유효하지 않습니다."});
     }
 
+    const userId = payload.id;
+    const user = await prisma.users.findFirst({where: {userId: +userId}});
+
+    if (!user) {
+        res.status(401).json({message : "토큰 사용자가 존재하지 않습니다."});
+    }
+
+    req.user = user;
+
+    next();
 }
 
 function validateToken(token, secretkey) {

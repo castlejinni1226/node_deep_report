@@ -14,14 +14,13 @@ model Users {
   userId Int @id @default(autoincrement()) @map("userId")
   email String @unique @map("email")
   password String @map("password")
-  checkpassword String @map("checkpassword")
   name String @map("name")
 
-  poster Posters[]
+  resume Resumes[]
 }
 
-model Posters {
-  posterId Int @id @default(autoincrement()) @map("postId")
+model Resumes {
+  resumeId Int @id @default(autoincrement()) @map("resumeId")
   userId Int @map("userId")
   title String @map("title")
   content String @map("content") @db.Text

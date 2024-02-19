@@ -1,7 +1,6 @@
 import express from 'express';
 import { prisma } from '../models/index.js'
 import { createAccessToken, validateAccessToken, validateToken } from "../middlewares/middleweare.js";
-
 const router = express.Router();
 
 router.get('/posts', async (req, res, next) => {
