@@ -68,7 +68,7 @@ router.post('/POST', async (req, res, next) => {
 
     return res.status(201).json({ data: post });
 });
-
+// 수정
 router.put('/posts/:postId', async (req, res, next) => {
     if (validateAccessToken(req, res)) {
         return;
@@ -108,19 +108,11 @@ router.delete('/postDelete/:postId', async(req, res, next) => {
     if (validateAccessToken(req, res)) {
         return;
     }
-
-    const { postId } = req.params;
-
+    const { postId } = req.params
     const post = await prisma.Posters.findFirst({
-        where : {
-            posterId : +postId,
-        }
+        where : {posterId : +postId,}
     });
-
-    if (!post) {
-        return res.status(404).json({message : "이력서 조회에 실패하였습니다." });
-    }
-
+    if (!post) {return res.status(404).json({message : "이력서 조회에 실패하였습니다." });}
     await prisma.Posters.delete({
         where: {
             posterId: +postId
