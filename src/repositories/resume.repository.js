@@ -1,11 +1,11 @@
-import { prisma } from '../../models/index.js'
-import { resumeService } from '../services/resume.service.js';
-
-export class resumeRepository {
+export class ResumeRepository {
+    constructor(prisma) {
+        this.prisma = prisma;
+    }
 
     createResume = async (title, content, userId, name) => {
 
-        const resume = await prisma.Resumes.create({
+        const resume = await this.prisma.Resumes.create({
             data: {
                 title: title,
                 content: content,
@@ -17,7 +17,7 @@ export class resumeRepository {
     }
     findAllResumes = async () => {
 
-        const resumes = await prisma.Resumes.findMany({
+        const resumes = await this.prisma.Resumes.findMany({
             orderBy: {
                 createdAt: 'desc'
             }
@@ -27,18 +27,19 @@ export class resumeRepository {
     };
 
     findResume = async(resumeId) => {
-        const resume = await prisma.Resumes.findFirst({
+        const resume = await this.prisma.Resumes.findFirst({
             where: { resumeId : +resumeId }
         });
         return resume;
     }
 
     changeResume = async(userId, resumeId, title, content, status) => {
-        const changeResume = await prisma.Resumes.update({
-            where: {resumeId: +resumeId},
+        const changeResume = await this.prisma.Resumes.update({
+            where: {
+                resumeId: +resumeId,
+                userId: +userId
+            },
             data: {
-                userId : userId,
-                resumeId : +resumeId,
                 title: title,
                 content: content,
                 status: status
@@ -48,12 +49,13 @@ export class resumeRepository {
     }
 
     deleteResume = async ( resumeId, userId ) => {
-        const deleteResume = await prisma.Resumes.delete({
+        const deleteResume = await this.prisma.Resumes.delete({
             where : { 
                 resumeId : +resumeId,
                 userId: +userId
             }
         });
+
         return deleteResume;
     }
 }
